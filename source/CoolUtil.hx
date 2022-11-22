@@ -19,6 +19,11 @@ class CoolUtil
 
 	public static var defaultDifficulty:String = 'NORMAL';
 
+	public static function difficultyFromInt(difficulty:Int):String
+	{
+		return difficultyArray[difficulty];
+	}
+
 	public static function difficultyString():String
 	{
 		return difficultyArray[PlayState.storyDifficulty];

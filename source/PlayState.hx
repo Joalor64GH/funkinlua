@@ -53,6 +53,7 @@ import lime.app.Application;
 import openfl.events.KeyboardEvent;
 import Character;
 import LLua;
+import scripting.FunkinLua;
 import states.*;
 import animateatlas.AtlasFrameMaker;
 import animate.FlxAnimate;
@@ -70,6 +71,7 @@ class PlayState extends MusicBeatState
 	public static var storyPlaylist:Array<String> = [];
 	public static var storyDifficulty:Int = 1;
 	public static var seenCutscene:Bool = false;
+	private var luaDebugGroup:FlxTypedGroup<DebugLuaText>;
 
 	var daSongName:String = '';
 
@@ -184,6 +186,15 @@ class PlayState extends MusicBeatState
 	var bfTankCutsceneLayer:FlxTypedGroup<FlxAnimate>;
 	var gfCutsceneLayerFlxSprite:FlxTypedGroup<FlxSprite>;
 	var bfTankCutsceneLayerFlxSprite:FlxTypedGroup<FlxSprite>;
+
+	//Psych Engine Stuff
+	public var modchartTweens:Map<String, FlxTween> = new Map<String, FlxTween>();
+	public var modchartSprites:Map<String, ModchartSprite> = new Map<String, ModchartSprite>();
+	public var modchartTimers:Map<String, FlxTimer> = new Map<String, FlxTimer>();
+	public var modchartSounds:Map<String, FlxSound> = new Map<String, FlxSound>();
+	public var modchartTexts:Map<String, ModchartText> = new Map<String, ModchartText>();
+	public var modchartSaves:Map<String, FlxSave> = new Map<String, FlxSave>();
+	public var modchartObjects:Map<String, FlxSprite> = new Map<String, FlxSprite>();
 
 	override public function create()
 	{
@@ -839,7 +850,7 @@ class PlayState extends MusicBeatState
 		missesTxt.scrollFactor.set();
 		add(missesTxt);
 
-		// Watermark
+		// Watermarkl
 		chocoTxt = new FlxText(360, healthBarBG.y + 30, 0, "Chocolate Engine v" + Application.current.meta.get('version'), 25);
 		chocoTxt.setFormat("assets/fonts/vcr.ttf", 20, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		chocoTxt.scrollFactor.set();
